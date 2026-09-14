@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Expo / React Native generated files
+.expo/
+.expo-shared/
+dist/
+web-build/
+
+# Native build outputs
+android/.gradle/
+android/app/build/
+ios/Pods/
+ios/build/
+
+# Environment files and local secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs and caches
+*.log
+.npm/
+.cache/
+coverage/
