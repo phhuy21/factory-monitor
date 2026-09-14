@@ -76,4 +76,4 @@ Broker công khai không phù hợp với dữ liệu thật hoặc môi trườ
 
 - Ứng dụng hỗ trợ node ID từ 1 đến 9.
 - Firmware ESP32 cần publish/subscribe đúng topic và cấu trúc JSON mô tả trong tài liệu kiến trúc.
-- Repository chỉ chứa mã nguồn ứng dụng. Báo cáo học tập, tệp làm việc tạm và thông tin cá nhân không được đưa vào bản public.
+- Repository chỉ chứa mã nguồn ứng dụng.
