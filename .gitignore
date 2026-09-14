@@ -19,6 +19,7 @@ ios/build/
 !.env.example
 *.pem
 *.key
+google-services.json
 
 # Editors and operating systems
 .idea/

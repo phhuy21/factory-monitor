@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "Factory Monitor",
+    "slug": "factory-monitor",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#0A0E1A"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.factory.monitor"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0A0E1A"
+      },
+      "package": "com.factory.monitor"
+    },
+    "plugins": [
+      "expo-asset"
+    ]
+  }
+}

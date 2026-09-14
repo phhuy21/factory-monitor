@@ -1,79 +1,83 @@
-# FactoryMonitor
+# FactoryMonitor — tiến độ ứng dụng di động
 
-Ứng dụng Expo/React Native dùng để giám sát và điều khiển các node ESP32 trong hệ thống an toàn môi trường công nghiệp. Ứng dụng nhận dữ liệu cảm biến qua MQTT, hiển thị trạng thái theo thời gian thực và gửi lệnh điều khiển về đúng node.
+Repository lưu riêng mã nguồn theo từng tuần để dễ theo dõi quá trình phát triển ứng dụng Expo/React Native giám sát môi trường công nghiệp bằng ESP32 và MQTT.
 
-## Chức năng chính
+## Tổng quan tiến độ
 
-- Theo dõi nhiệt độ, độ ẩm, mức khí gas và trạng thái kết nối của nhiều node.
-- Hiển thị cảnh báo và trạng thái relay theo thời gian thực.
-- Bật/tắt relay, tắt còi tạm thời hoặc tắt còi cứng từ ứng dụng.
-- Cấu hình ngưỡng cảnh báo và lịch bật/tắt relay.
+| Hạng mục | Tuần 1 | Tuần 2 |
+| --- | --- | --- |
+| Nền tảng | Expo 52, React Native 0.76 | Nâng lên Expo 57, React Native 0.86 |
+| MQTT | Kết nối broker WebSocket, nhận dữ liệu và gửi lệnh | Tự kết nối, đồng bộ cấu hình hai chiều và xử lý callback đầy đủ hơn |
+| Giám sát | Nhiệt độ, độ ẩm, gas, relay, cảnh báo và trạng thái online | Giữ toàn bộ chức năng tuần 1 và bổ sung lưu lịch sử |
+| Điều khiển | Relay, mute/hard mute, ngưỡng và lịch bật/tắt | Đồng bộ cấu hình với ESP32 và sao lưu cấu hình lên Firestore |
+| Giao diện | 4 tab: Giám sát, Hẹn giờ, Ngưỡng, Hệ thống | 5 tab, thêm màn hình Lịch sử |
+| Tài khoản | Chưa có | Đăng nhập/đăng ký bằng Firebase Authentication |
+| Dữ liệu đám mây | Chưa có | Firestore lưu dữ liệu cảm biến, cấu hình và sự kiện cảnh báo |
+| Thông báo | Cảnh báo trong giao diện | Thêm NotificationService dùng Alert trong Expo Go |
+
+## Tuần 1 — nền tảng giám sát MQTT
+
+Mã nguồn: [`Tuan-1/`](Tuan-1/)
+
+- Xây dựng giao diện tối cho ứng dụng giám sát nhà máy.
+- Nhận dữ liệu nhiệt độ, độ ẩm, khí gas, relay và cảnh báo từ nhiều node ESP32.
+- Hiển thị trạng thái MQTT, node online/offline và thời gian cập nhật.
+- Điều khiển relay, mute cảnh báo và hard mute từ điện thoại.
+- Cài ngưỡng nhiệt độ/độ ẩm/gas và lịch bật/tắt relay.
 - Đồng bộ thời gian từ điện thoại xuống node không có RTC.
-- Tự đánh dấu node offline khi quá thời gian nhận dữ liệu.
+- Chuẩn hóa kiểu gói tin, topic MQTT, Zustand store và các component dùng lại.
 
-## Kiến trúc
+## Tuần 2 — tài khoản, Firebase và lịch sử
 
-```mermaid
-flowchart LR
-    A[Ứng dụng FactoryMonitor] <-->|MQTT over WebSocket| B[MQTT broker]
-    B <-->|JSON topics| C[ESP32 node 1]
-    B <-->|JSON topics| D[ESP32 node 2]
-    B <-->|JSON topics| E[ESP32 node 3..9]
+Mã nguồn: [`Tuan-2/`](Tuan-2/)
+
+- Bổ sung đăng nhập, đăng ký, đăng xuất và duy trì phiên bằng Firebase Authentication.
+- Lưu dữ liệu cảm biến định kỳ lên Cloud Firestore.
+- Thêm màn hình Lịch sử để xem dữ liệu theo node và khoảng thời gian.
+- Ghi lại sự kiện cảnh báo và sao lưu cấu hình ngưỡng/hẹn giờ lên cloud.
+- Đồng bộ cấu hình từ ESP32 về ứng dụng qua MQTT và yêu cầu cấu hình khi kết nối.
+- Tự kết nối MQTT sau khi đăng nhập; quản lý vòng đời MQTT và TimeSync tập trung tại `App.tsx`.
+- Thêm dịch vụ thông báo cảnh báo tương thích Expo Go.
+
+## Cấu trúc repository
+
+```text
+.
+├── Tuan-1/                 # Bản nền tảng MQTT và giao diện giám sát
+│   ├── docs/               # Kiến trúc và giao thức MQTT
+│   ├── src/
+│   └── README.md
+├── Tuan-2/                 # Bản mở rộng Firebase, lịch sử và tài khoản
+│   ├── src/
+│   ├── .env.example        # Mẫu cấu hình Firebase, không chứa khóa thật
+│   └── README.md
+├── Bao-cao/
+│   ├── Chuong_1_2_FactoryMonitor_WiFi_Firebase.docx
+│   └── README.md
+└── README.md
 ```
 
-Thông tin chi tiết về topic, gói dữ liệu và các thư mục nằm trong [tài liệu kiến trúc](docs/ARCHITECTURE.md).
+## Chạy dự án
 
-## Bắt đầu nhanh
-
-Yêu cầu: Node.js LTS và npm.
+Tuần 1:
 
 ```bash
+cd Tuan-1
 npm install
 npm start
 ```
 
-Sau khi Expo khởi động, chọn Android, iOS hoặc Web. Trong tab **Hệ thống**, nhập địa chỉ MQTT broker sử dụng WebSocket rồi bấm kết nối.
-
-Các lệnh hữu ích:
+Tuần 2:
 
 ```bash
-npm run android
-npm run ios
-npm run web
-npm run typecheck
+cd Tuan-2
+copy .env.example .env
+npm install
+npm start
 ```
 
-## Cấu hình MQTT
+Điền cấu hình Firebase của riêng bạn vào `Tuan-2/.env` trước khi chạy tuần 2. Broker MQTT mặc định chỉ dành cho thử nghiệm; khi triển khai thật nên dùng broker riêng có TLS, xác thực và phân quyền topic.
 
-Cấu hình mặc định nằm tại `src/constants/mqtt.ts` và dùng HiveMQ public broker để thử nghiệm:
+## Báo cáo
 
-```text
-wss://broker.hivemq.com:8884/mqtt
-```
-
-Broker công khai không phù hợp với dữ liệu thật hoặc môi trường sản xuất. Khi triển khai, hãy dùng broker riêng có TLS, xác thực và phân quyền topic; không ghi username/password trực tiếp vào mã nguồn.
-
-## Cấu trúc thư mục
-
-```text
-.
-├── App.tsx                 # Điểm vào ứng dụng
-├── docs/
-│   └── ARCHITECTURE.md     # Luồng dữ liệu và giao thức MQTT
-├── src/
-│   ├── components/         # Thành phần giao diện tái sử dụng
-│   ├── constants/          # Theme và cấu hình MQTT
-│   ├── navigation/         # Điều hướng 4 tab
-│   ├── screens/            # Giám sát, hẹn giờ, ngưỡng, hệ thống
-│   ├── services/           # MQTT và đồng bộ thời gian
-│   ├── store/              # Trạng thái ứng dụng bằng Zustand
-│   └── types/              # Kiểu gói tin giữa app và ESP32
-├── package.json
-└── tsconfig.json
-```
-
-## Ghi chú
-
-- Ứng dụng hỗ trợ node ID từ 1 đến 9.
-- Firmware ESP32 cần publish/subscribe đúng topic và cấu trúc JSON mô tả trong tài liệu kiến trúc.
-- Repository chỉ chứa mã nguồn ứng dụng.
+Báo cáo Chương 1–2 được lưu tại [`Bao-cao/Chuong_1_2_FactoryMonitor_WiFi_Firebase.docx`](Bao-cao/Chuong_1_2_FactoryMonitor_WiFi_Firebase.docx).
