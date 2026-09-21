@@ -20,6 +20,7 @@ ios/build/
 *.pem
 *.key
 google-services.json
+fcm-service-account.json
 
 # Editors and operating systems
 .idea/

@@ -4,16 +4,16 @@ Repository lưu riêng mã nguồn theo từng tuần để dễ theo dõi quá 
 
 ## Tổng quan tiến độ
 
-| Hạng mục | Tuần 1 | Tuần 2 |
-| --- | --- | --- |
-| Nền tảng | Expo 52, React Native 0.76 | Nâng lên Expo 57, React Native 0.86 |
-| MQTT | Kết nối broker WebSocket, nhận dữ liệu và gửi lệnh | Tự kết nối, đồng bộ cấu hình hai chiều và xử lý callback đầy đủ hơn |
-| Giám sát | Nhiệt độ, độ ẩm, gas, relay, cảnh báo và trạng thái online | Giữ toàn bộ chức năng tuần 1 và bổ sung lưu lịch sử |
-| Điều khiển | Relay, mute/hard mute, ngưỡng và lịch bật/tắt | Đồng bộ cấu hình với ESP32 và sao lưu cấu hình lên Firestore |
-| Giao diện | 4 tab: Giám sát, Hẹn giờ, Ngưỡng, Hệ thống | 5 tab, thêm màn hình Lịch sử |
-| Tài khoản | Chưa có | Đăng nhập/đăng ký bằng Firebase Authentication |
-| Dữ liệu đám mây | Chưa có | Firestore lưu dữ liệu cảm biến, cấu hình và sự kiện cảnh báo |
-| Thông báo | Cảnh báo trong giao diện | Thêm NotificationService dùng Alert trong Expo Go |
+| Hạng mục | Tuần 1 | Tuần 2 | Tuần 3 |
+| --- | --- | --- | --- |
+| Nền tảng | Expo 52, React Native 0.76 | Nâng lên Expo 57, React Native 0.86 | Thêm EAS build, camera và notification native |
+| MQTT | Kết nối broker WebSocket, nhận dữ liệu và gửi lệnh | Tự kết nối, đồng bộ cấu hình hai chiều | Đồng bộ push token và có bộ giả lập nhiều node |
+| Giám sát | Cảm biến, relay, cảnh báo và trạng thái online | Bổ sung lưu và xem lịch sử | Cải thiện cảnh báo, biểu đồ và quản lý trụ |
+| Điều khiển | Relay, mute/hard mute, ngưỡng và lịch bật/tắt | Sao lưu cấu hình lên Firestore | Ghép, đổi tên và xóa trụ theo tài khoản |
+| Giao diện | 4 tab chức năng | 5 tab, thêm Lịch sử | Quét QR và nhập mã thiết bị linh hoạt |
+| Tài khoản | Chưa có | Firebase Authentication | Danh sách thiết bị riêng cho từng tài khoản |
+| Dữ liệu đám mây | Chưa có | Firestore lưu dữ liệu, cấu hình và cảnh báo | Lưu thiết bị và push token phục vụ cảnh báo nền |
+| Thông báo | Cảnh báo trong giao diện | Alert trong Expo Go | Push notification, FCM và Cloud Function mẫu |
 
 ## Tuần 1 — nền tảng giám sát MQTT
 
@@ -39,6 +39,17 @@ Mã nguồn: [`Tuan-2/`](Tuan-2/)
 - Tự kết nối MQTT sau khi đăng nhập; quản lý vòng đời MQTT và TimeSync tập trung tại `App.tsx`.
 - Thêm dịch vụ thông báo cảnh báo tương thích Expo Go.
 
+## Tuần 3 — ghép thiết bị và cảnh báo nền
+
+Mã nguồn: [`Tuan-3/`](Tuan-3/)
+
+- Ghép trụ bằng mã QR hoặc nhập mã thiết bị thủ công.
+- Lưu, đổi tên và xóa thiết bị riêng theo từng tài khoản Firebase.
+- Tích hợp push notification native, kênh cảnh báo Android mức ưu tiên cao và lưu push token.
+- Bổ sung Cloud Function mẫu để gửi cảnh báo khi ứng dụng đã tắt.
+- Thêm EAS build và các quyền camera/notification cần thiết.
+- Bổ sung bộ giả lập nhiều node MQTT để kiểm thử relay và tình huống nguy hiểm.
+
 ## Cấu trúc repository
 
 ```text
@@ -50,6 +61,11 @@ Mã nguồn: [`Tuan-2/`](Tuan-2/)
 ├── Tuan-2/                 # Bản mở rộng Firebase, lịch sử và tài khoản
 │   ├── src/
 │   ├── .env.example        # Mẫu cấu hình Firebase, không chứa khóa thật
+│   └── README.md
+├── Tuan-3/                 # QR pairing, quản lý trụ và push notification
+│   ├── src/
+│   ├── cloud-function-alert.js
+│   ├── simulate_nodes.js
 │   └── README.md
 ├── Bao-cao/
 │   ├── Chuong_1_2_FactoryMonitor_WiFi_Firebase.docx
@@ -76,7 +92,16 @@ npm install
 npm start
 ```
 
-Điền cấu hình Firebase của riêng bạn vào `Tuan-2/.env` trước khi chạy tuần 2. Broker MQTT mặc định chỉ dành cho thử nghiệm; khi triển khai thật nên dùng broker riêng có TLS, xác thực và phân quyền topic.
+Tuần 3:
+
+```bash
+cd Tuan-3
+copy .env.example .env
+npm install
+npm start
+```
+
+Điền cấu hình Firebase của riêng bạn vào `.env` trước khi chạy tuần 2 hoặc tuần 3. Tuần 3 cần thêm `google-services.json` khi build Android có FCM. Broker MQTT mặc định chỉ dành cho thử nghiệm; khi triển khai thật nên dùng broker riêng có TLS, xác thực và phân quyền topic.
 
 ## Báo cáo
 

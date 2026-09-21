@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "name": "Factory Monitor",
+    "slug": "factory-monitor",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#0A0E1A"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.factory.monitor"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0A0E1A"
+      },
+      "package": "com.factory.monitor",
+      "googleServicesFile": "./google-services.json",
+      "permissions": [
+        "CAMERA",
+        "VIBRATE",
+        "RECEIVE_BOOT_COMPLETED",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.VIBRATE",
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.ACCESS_NOTIFICATION_POLICY"
+      ]
+    },
+    "plugins": [
+      "expo-asset",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Cho phép Factory Monitor truy cập máy ảnh để quét mã QR kết nối trụ giám sát."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#EF4444",
+          "defaultChannel": "factory_emergency_v2"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "6e502bae-1d87-4b58-b833-fc3e530fd571"
+      }
+    }
+  }
+}

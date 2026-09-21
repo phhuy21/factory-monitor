@@ -1,0 +1,23 @@
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+.DS_Store
+.env
+.env.*
+!.env.example
+google-services.json
+
+# Ignore redundant backup folder
+FactoryMonitor/
+
+# Logs
+*.log
+fcm-service-account.json
