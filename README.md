@@ -69,6 +69,7 @@ Mã nguồn: [`Tuan-3/`](Tuan-3/)
 │   └── README.md
 ├── Bao-cao/
 │   ├── Chuong_1_2_FactoryMonitor_WiFi_Firebase.docx
+│   ├── Chuong_1_2_3_FactoryMonitor_WiFi_MQTT_Firebase_CapNhat.docx
 │   └── README.md
 └── README.md
 ```
@@ -105,4 +106,5 @@ npm start
 
 ## Báo cáo
 
-Báo cáo Chương 1–2 được lưu tại [`Bao-cao/Chuong_1_2_FactoryMonitor_WiFi_Firebase.docx`](Bao-cao/Chuong_1_2_FactoryMonitor_WiFi_Firebase.docx).
+- [Báo cáo Chương 1–2](Bao-cao/Chuong_1_2_FactoryMonitor_WiFi_Firebase.docx)
+- [Báo cáo cập nhật Chương 1–2–3](Bao-cao/Chuong_1_2_3_FactoryMonitor_WiFi_MQTT_Firebase_CapNhat.docx)
