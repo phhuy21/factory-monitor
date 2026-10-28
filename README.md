@@ -118,3 +118,7 @@ npm start
 ## Báo cáo thuyết trình
 
 - [PowerPoint FactoryMonitor và MobileOne](Thuyet-trinh/Bao_Cao_Thuyet_Trinh_FactoryMonitor_va_MobileOne.pptx)
+
+## Video demo
+
+- [Xem video demo trên YouTube](https://youtu.be/Q1dO_BDRoL0)
