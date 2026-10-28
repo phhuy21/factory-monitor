@@ -109,3 +109,8 @@ npm start
 - [Báo cáo Chương 1–2](Bao-cao/Chuong_1_2_FactoryMonitor_WiFi_Firebase.docx)
 - [Báo cáo cập nhật Chương 1–2–3](Bao-cao/Chuong_1_2_3_FactoryMonitor_WiFi_MQTT_Firebase_CapNhat.docx)
 - [Báo cáo mới — DD_N10](Bao-cao/DD_N10.docx)
+
+## Project nâng cao và tiến độ
+
+- [Project nâng cao](PROJECT%20NANG%20CAO/)
+- [Bảng tiến độ giám sát môi trường công nghiệp](Tien-do/Bang_tien_do_Giam_sat_moi_truong_cong_nghiep.xlsx)
