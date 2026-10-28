@@ -114,3 +114,7 @@ npm start
 
 - [Project nâng cao](PROJECT%20NANG%20CAO/)
 - [Bảng tiến độ giám sát môi trường công nghiệp](Tien-do/Bang_tien_do_Giam_sat_moi_truong_cong_nghiep.xlsx)
+
+## Báo cáo thuyết trình
+
+- [PowerPoint FactoryMonitor và MobileOne](Thuyet-trinh/Bao_Cao_Thuyet_Trinh_FactoryMonitor_va_MobileOne.pptx)
